@@ -1,0 +1,9 @@
+.order-list {
+  position: relative;
+  z-index: 2;
+  width: 400px;
+  min-width: 250px;
+  min-height: 100vh;
+  box-shadow: 2px 0 2px 0 rgb(0 0 0 / 10%);
+  /*overflow-x: auto;*/
+}

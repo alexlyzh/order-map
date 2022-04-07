@@ -5,7 +5,7 @@ import 'leaflet-routing-machine';
 import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import useMap from '../../hooks/use-map';
 import { useEffect, useRef } from 'react';
-import { centerOfAmsterdam } from '../../const';
+import { mapCenter } from '../../const';
 
 type Props = {
   waypoints: number[][],
@@ -20,7 +20,7 @@ L.Marker.prototype.options.icon = L.icon({
 function Map({waypoints}: Props): JSX.Element {
   const mapRef = useRef(null);
 
-  const map = useMap(mapRef, centerOfAmsterdam);
+  const map = useMap(mapRef, mapCenter);
 
   useEffect(() => {
     if (!map) {
@@ -31,8 +31,8 @@ function Map({waypoints}: Props): JSX.Element {
       waypoints: waypoints.map((point) => L.latLng(point[0], point[1])),
       lineOptions: {
         styles: [{
-          color: "blue",
-          opacity: 0.6,
+          color: '#FF4C4C',
+          opacity: 0.8,
           weight: 5
         }],
         extendToWaypoints: true,

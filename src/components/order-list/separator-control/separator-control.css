@@ -1,0 +1,23 @@
+.separator-control {
+  position: absolute;
+  top: 50%;
+  right: -12px;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border: 1px solid #d5d5d5;
+  cursor: col-resize;
+  height: 45px;
+  width: 24px;
+  user-select: none;
+}
+
+.separator-control:hover {
+  background-color: #e7e5f4;
+}
+
+.separator-control:active {
+  background-color: #D8D7E4;
+}

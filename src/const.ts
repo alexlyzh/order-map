@@ -1,7 +1,7 @@
-export const MAP_ZOOM = 13;
+export const MAP_ZOOM = 15;
 
-export const centerOfAmsterdam = {
-  latitude: 52.37,
-  longitude: 4.89,
+export const mapCenter = {
+  latitude: 43,
+  longitude: 35,
   zoom: MAP_ZOOM
 };
