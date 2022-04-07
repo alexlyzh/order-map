@@ -31,7 +31,7 @@ function Map({waypoints}: Props): JSX.Element {
       waypoints: waypoints.map((point) => L.latLng(point[0], point[1])),
       lineOptions: {
         styles: [{
-          color: '#FF4C4C',
+          color: '#0899f3',
           opacity: 0.8,
           weight: 5
         }],

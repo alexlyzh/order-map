@@ -7,9 +7,9 @@ export const useSeparator = (
 
   const handleMouseMove = useCallback((evt: MouseEvent) => {
     if (dragging.current && ref.current) {
-      ref.current.style.width = `${evt.clientX}px`;
+      ref.current.style.width = `${Math.min(evt.clientX, 700)}px`;
     }
-  }, [ref]);
+  }, []);
 
   const handleMouseDown = useCallback(() => {
     dragging.current = true;
