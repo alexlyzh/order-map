@@ -1,4 +1,6 @@
-export const cities = [
+import { Order, Location } from '../types/types';
+
+export const locations: Location[] = [
   {
     name: 'Amsterdam',
     latitude: 52.37,
@@ -10,19 +12,9 @@ export const cities = [
     longitude: 37.62,
   },
   {
-    name: 'Athens',
-    latitude: 37.98,
-    longitude: 23.73,
-  },
-  {
     name: 'Berlin',
     latitude: 52.52,
     longitude: 13.41,
-  },
-  {
-    name: 'Warsaw',
-    latitude: 52.23,
-    longitude: 21.01,
   },
   {
     name: 'Vatican',
@@ -43,5 +35,58 @@ export const cities = [
     name: 'Rome',
     latitude: 41.89,
     longitude: 12.51,
+  },
+  {
+    name: 'Beijing',
+    latitude: 39.90,
+    longitude: 116.40,
+  },
+  {
+    name: 'Dublin',
+    latitude: 53.33,
+    longitude: -6.24,
+  },
+];
+
+export const orders: Order[] = [
+  {
+    name: 'Cars',
+    source: 'Berlin',
+    destination: 'Moscow',
+  },
+  {
+    name: 'Gas',
+    source: 'Moscow',
+    destination: 'Berlin',
+  },
+  {
+    name: 'Cellphones',
+    source: 'Beijing',
+    destination: 'Moscow',
+  },
+  {
+    name: 'Coal',
+    source: 'Moscow',
+    destination: 'Beijing',
+  },
+  {
+    name: 'Cheese',
+    source: 'Paris',
+    destination: 'Moscow',
+  },
+  {
+    name: 'Pizza',
+    source: 'Rome',
+    destination: 'Moscow',
+  },
+  {
+    name: 'Wine',
+    source: 'Paris',
+    destination: 'Moscow',
+  },
+  {
+    name: 'Whiskey',
+    source: 'Dublin',
+    destination: 'Moscow',
   },
 ];

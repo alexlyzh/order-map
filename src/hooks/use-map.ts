@@ -1,19 +1,19 @@
 import { MutableRefObject, useEffect, useState } from 'react';
 import { Map, TileLayer } from 'leaflet';
-import { Location } from '../types/types';
+import { MapLocation } from '../types/types';
 
 const URL_TEMPLATE = 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
 
 function useMap(
   mapRef: MutableRefObject<HTMLElement | null>,
-  location: Location,
+  location: MapLocation,
 ): Map | null {
   const [map, setMap] = useState<Map | null>(null);
 
   useEffect(() => {
     let instance: Map;
 
-    if (mapRef.current !== null && map === null) {
+    if (mapRef.current && !map) {
       instance = new Map(mapRef.current, {
         center: {
           lat: location.latitude,
@@ -24,7 +24,6 @@ function useMap(
       });
 
       const layer = new TileLayer(URL_TEMPLATE);
-
       instance.addLayer(layer);
 
       setMap(instance);

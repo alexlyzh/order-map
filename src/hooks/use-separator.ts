@@ -1,4 +1,4 @@
-import { useCallback, MutableRefObject, useEffect, useRef } from 'react';
+import { MutableRefObject, useCallback, useEffect, useRef } from 'react';
 
 export const useSeparator = (
   ref: MutableRefObject<HTMLElement | null>,
@@ -29,5 +29,5 @@ export const useSeparator = (
     document.removeEventListener('mousedown', handleMouseDown);
   });
 
-  return { handleMouseDown, handleMouseUp, handleMouseMove };
+  return {handleMouseDown, handleMouseUp, handleMouseMove};
 };

@@ -11,10 +11,10 @@ function App(): JSX.Element {
 
   return (
     <div className="page">
-      <div className="app">
+      <form className="app">
         <OrderList />
         <Map waypoints={waypoints}/>
-      </div>
+      </form>
     </div>
   );
 }

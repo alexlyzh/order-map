@@ -19,7 +19,6 @@ L.Marker.prototype.options.icon = L.icon({
 
 function Map({waypoints}: Props): JSX.Element {
   const mapRef = useRef(null);
-
   const map = useMap(mapRef, mapCenter);
 
   useEffect(() => {
@@ -31,8 +30,8 @@ function Map({waypoints}: Props): JSX.Element {
       waypoints: waypoints.map((point) => L.latLng(point[0], point[1])),
       lineOptions: {
         styles: [{
-          color: '#0899f3',
-          opacity: 0.8,
+          color: '#ff0f0f',
+          opacity: 0.6,
           weight: 5
         }],
         extendToWaypoints: true,

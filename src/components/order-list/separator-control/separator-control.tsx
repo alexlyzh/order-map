@@ -8,7 +8,7 @@ type Props = {
 
 function SeparatorControl({onMouseDown, onMouseUp}: Props) {
   return (
-    <span
+    <div
       className="separator-control"
       onMouseDown={onMouseDown}
       onMouseUp={onMouseUp}
