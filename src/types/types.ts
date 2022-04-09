@@ -15,3 +15,8 @@ export type Order = {
   source: string,
   destination: string,
 }
+
+export enum Waypoint {
+  source = 'source',
+  destination = 'destination',
+}

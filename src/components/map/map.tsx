@@ -6,10 +6,8 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.css';
 import useMap from '../../hooks/use-map';
 import { useEffect, useRef } from 'react';
 import { mapCenter } from '../../const';
-
-type Props = {
-  waypoints: number[][],
-}
+import { useSelector } from 'react-redux';
+import { getWaypoints } from '../../store/reducer/data-reducer/selectors';
 
 L.Marker.prototype.options.icon = L.icon({
   iconUrl: 'img/pin.svg',
@@ -17,7 +15,8 @@ L.Marker.prototype.options.icon = L.icon({
   iconAnchor: [20, 40],
 });
 
-function Map({waypoints}: Props): JSX.Element {
+function Map(): JSX.Element {
+  const waypoints = useSelector(getWaypoints);
   const mapRef = useRef(null);
   const map = useMap(mapRef, mapCenter);
 
@@ -34,6 +33,7 @@ function Map({waypoints}: Props): JSX.Element {
           opacity: 0.6,
           weight: 5
         }],
+        addWaypoints: false,
         extendToWaypoints: true,
         missingRouteTolerance: 1,
       },
