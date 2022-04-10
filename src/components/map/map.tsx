@@ -1,4 +1,4 @@
-import './map.css'
+import './map.css';
 import L from 'leaflet';
 import 'leaflet/dist/leaflet.css';
 import 'leaflet-routing-machine';

@@ -4,6 +4,7 @@ import { State } from '../index';
 export const getCurrentOrderName = ({data: {currentOrderName}}: State) => currentOrderName;
 export const getOrders = ({data: {orders}}: State) => orders;
 export const getLocations = ({data: {locations}}: State) => locations;
+export const getIsDataLoaded = ({data: {locations, orders}}: State) => Boolean(locations.length && orders.length);
 
 export const getWaypoints = createSelector(
   [getCurrentOrderName, getOrders, getLocations],
@@ -11,13 +12,13 @@ export const getWaypoints = createSelector(
     const currentOrder = orders.find(({name}) => name === currentOrderName)!;
 
     const waypoint = locations.reduce((acc, {name, latitude, longitude}) => {
-        if (name === currentOrder.source) {
-          acc.sourceLatLng = [latitude, longitude];
-        }
-        if (name === currentOrder.destination) {
-          acc.destinationLatLng = [latitude, longitude];
-        }
-        return acc;
+      if (name === currentOrder.source) {
+        acc.sourceLatLng = [latitude, longitude];
+      }
+      if (name === currentOrder.destination) {
+        acc.destinationLatLng = [latitude, longitude];
+      }
+      return acc;
     }, {} as { sourceLatLng: number[], destinationLatLng: number[]});
 
     return [waypoint.sourceLatLng, waypoint.destinationLatLng] as number[][];

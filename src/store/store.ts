@@ -1,4 +1,4 @@
-import createSagaMiddleware from "redux-saga";
+import createSagaMiddleware from 'redux-saga';
 import reducer from './reducer';
 import watcherSaga from './sagas';
 import { configureStore } from '@reduxjs/toolkit';

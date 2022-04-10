@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { locations, orders } from '../../../const';
+import { Action } from '@reduxjs/toolkit';
 import { Location, Order, Waypoint } from '../../../types/types';
 
 type DataState = {
@@ -8,21 +8,30 @@ type DataState = {
   locations: Location[],
 }
 
-type BasicAction = { type: string }
-type CustomAction<T> = BasicAction & T;
-type WaypointAction = CustomAction<{payload: { orderName: string, waypointType: Waypoint, locationName: string }}>;
+type ActionWithPayload<T> = Action<string> & { payload: T };
+type WaypointAction = ActionWithPayload<{ orderName: string, waypointType: Waypoint, locationName: string }>;
+type SetOrdersAction = ActionWithPayload<Order[]>;
+type SetLocationsAction = ActionWithPayload<Location[]>;
 
 const initialState: Readonly<DataState> = {
-  currentOrderName: orders[0].name,
-  orders,
-  locations,
-}
+  currentOrderName: '',
+  orders: [],
+  locations: [],
+};
 
 const dataSlice = createSlice({
   name: 'data',
   initialState,
   reducers: {
-    setCurrentOrderName(state, {payload} : CustomAction<{payload: string}>) {
+    initApp() {},
+    setOrders(state, {payload}: SetOrdersAction) {
+      state.orders = payload;
+      state.currentOrderName = payload[0].name;
+    },
+    setLocations(state, {payload}: SetLocationsAction) {
+      state.locations = payload;
+    },
+    setCurrentOrderName(state, {payload}: ActionWithPayload<string>) {
       state.currentOrderName = payload;
     },
     changeWaypoint({orders}, {payload}: WaypointAction) {
@@ -40,4 +49,4 @@ const dataReducer = dataSlice.reducer;
 const dataAction = dataSlice.actions;
 
 export { dataAction, dataReducer };
-export type { DataState, WaypointAction };
+export type { DataState, WaypointAction, SetOrdersAction };

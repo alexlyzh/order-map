@@ -1,15 +1,14 @@
 import './order-list.css';
-import 'antd/dist/antd.css'
+import 'antd/dist/antd.css';
 import SeparatorControl from './separator-control/separator-control';
-import { Select } from 'antd';
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useSeparator } from '../../hooks/use-separator';
-import { getCurrentOrderName } from '../../store/reducer/data-reducer/selectors';
-import { locations, orders } from '../../const';
+import { getCurrentOrderName, getOrders } from '../../store/reducer/data-reducer/selectors';
 import { dataAction, WaypointAction } from '../../store/reducer/data-reducer/data-reducer';
 import { Dispatch } from '@reduxjs/toolkit';
 import { Waypoint } from '../../types/types';
+import Waypoints from './waypoints/waypoints';
 
 const handleWaypointChange = (
   dispatch: Dispatch<WaypointAction>,
@@ -21,6 +20,7 @@ const handleWaypointChange = (
 function OrderList(): JSX.Element {
   const dispatch = useDispatch();
   const currentOrderName = useSelector(getCurrentOrderName);
+  const orders = useSelector(getOrders);
   const listRef = useRef<HTMLElement | null>(null);
   const { handleMouseDown, handleMouseUp } = useSeparator(listRef);
 
@@ -31,11 +31,13 @@ function OrderList(): JSX.Element {
         {orders.map(({name, source, destination}) => {
           const handleCurrentOrderNameChange = () => dispatch(dataAction.setCurrentOrderName(name));
 
-          const handleSourceChange = (value: string, ..._rest: unknown[]) =>
+          const handleSourceChange = (value: string, ..._rest: unknown[]) => {
             handleWaypointChange(dispatch, Waypoint.source, name, value);
+          };
 
-          const handleDestinationChange = (value: string, ..._rest: unknown[]) =>
+          const handleDestinationChange = (value: string, ..._rest: unknown[]) => {
             handleWaypointChange(dispatch, Waypoint.destination, name, value);
+          };
 
           return (
             <li
@@ -43,43 +45,15 @@ function OrderList(): JSX.Element {
               key={name}
               onClick={handleCurrentOrderNameChange}
             >
-              <span className="order-list__text">{name}</span>
-              <div className="order-list__waypoints">
-                <div>
-                  <p className="order-list__text--secondary">Source</p>
-                  <Select
-                    className="order-list__select"
-                    placeholder={'Select source'}
-                    defaultValue={source}
-                    disabled={name !== currentOrderName}
-                    onSelect={handleSourceChange}
-                    onClick={(evt) => evt.stopPropagation()}
-                  >
-                    {locations.map(({name}, index) => (
-                      <Select.Option key={`${name}-${index}-source`} value={name}>
-                        {name}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </div>
-                <div>
-                  <p className="order-list__text--secondary">Destination</p>
-                  <Select
-                    className="order-list__select"
-                    placeholder={'Select destination'}
-                    defaultValue={destination}
-                    disabled={name !== currentOrderName}
-                    onSelect={handleDestinationChange}
-                    onClick={(evt) => evt.stopPropagation()}
-                  >
-                    {locations.map(({name}, index) => (
-                      <Select.Option key={`${name}-${index}-destination`} value={name}>
-                        {name}
-                      </Select.Option>
-                    ))}
-                  </Select>
-                </div>
-              </div>
+              <span className="text">{name}</span>
+              <Waypoints
+                name={name}
+                currentOrderName={currentOrderName}
+                source={source}
+                destination={destination}
+                onSourceChange={handleSourceChange}
+                onDestinationChange={handleDestinationChange}
+              />
             </li>
           );
         })}

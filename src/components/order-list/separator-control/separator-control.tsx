@@ -1,4 +1,4 @@
-import './separator-control.css'
+import './separator-control.css';
 import React, { MouseEvent } from 'react';
 
 type Props = {
